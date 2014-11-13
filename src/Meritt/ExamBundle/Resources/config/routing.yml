@@ -1,0 +1,8 @@
+meritt_exam_question:
+    resource: "@MerittExamBundle/Resources/config/routing/question.xml"
+    prefix:   /question
+
+meritt_exam_student:
+    resource: "@MerittExamBundle/Resources/config/routing/student.xml"
+    prefix:   /student
+

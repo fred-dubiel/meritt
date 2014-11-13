@@ -1,0 +1,4 @@
+meritt_exam:
+    resource: "@MerittExamBundle/Resources/config/routing.yml"
+    prefix:   /
+
