@@ -41,8 +41,15 @@ class Student
      * @ORM\Column(name="state", type="string", length=255)
      */
     private $state;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Evaluation", mappedBy="student")
+     */
+    private $evaluations;
 
-
+    function __construct() {
+        $this->evaluations = new ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -121,4 +128,14 @@ class Student
     {
         return $this->state;
     }
+    
+    public function getEvaluations() {
+        return $this->evaluations;
+    }
+
+    public function setEvaluations($evaluations) {
+        $this->evaluations = $evaluations;
+    }
+
+
 }

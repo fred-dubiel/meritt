@@ -40,9 +40,24 @@ class Question
      * @ORM\OneToMany(targetEntity="Alternative", mappedBy="question")
      */
     private $alternatives;
+    
+    /**
+     *
+     * @var Collection
+     * 
+     *
+     * @ORM\ManyToMany(targetEntity="Exam", mappedBy="questions")
+     **/
+    private $exams;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Evaluation", mappedBy="question")
+     */
+    private $evaluations;
 
     function __construct() {
-        $this->products = new ArrayCollection();
+        $this->exams = new ArrayCollection();
+        $this->evaluations = new ArrayCollection();
     }
 
         /**
@@ -107,6 +122,24 @@ class Question
     public function setAlternatives($alternatives) {
         $this->alternatives = $alternatives;
     }
+    
+    public function getExams() {
+        return $this->exams;
+    }
+
+    public function setExams(Collection $exams) {
+        $this->exams = $exams;
+    }
+
+    public function getEvaluations() {
+        return $this->evaluations;
+    }
+
+    public function setEvaluations($evaluations) {
+        $this->evaluations = $evaluations;
+    }
+
+
 
 
     

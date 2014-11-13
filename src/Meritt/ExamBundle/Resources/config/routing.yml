@@ -1,3 +1,11 @@
+meritt_exam_evaluation:
+    resource: "@MerittExamBundle/Resources/config/routing/evaluation.xml"
+    prefix:   /evaluation
+
+meritt_exam_exam:
+    resource: "@MerittExamBundle/Resources/config/routing/exam.xml"
+    prefix:   /exam
+
 meritt_exam_alternative:
     resource: "@MerittExamBundle/Resources/config/routing/alternative.xml"
     prefix:   /alternative
