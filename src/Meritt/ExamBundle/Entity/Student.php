@@ -138,5 +138,8 @@ class Student
         $this->evaluations = $evaluations;
     }
 
-
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

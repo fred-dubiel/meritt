@@ -127,9 +127,6 @@ class Question
         return $this->exams;
     }
 
-    public function setExams(Collection $exams) {
-        $this->exams = $exams;
-    }
 
     public function getEvaluations() {
         return $this->evaluations;
@@ -139,7 +136,10 @@ class Question
         $this->evaluations = $evaluations;
     }
 
-
+    public function __toString()
+    {
+        return $this->getQuestionText();
+    }
 
 
     

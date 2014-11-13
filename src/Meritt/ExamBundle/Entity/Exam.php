@@ -113,8 +113,10 @@ class Exam
         return $this->questions;
     }
 
-    public function setQuestions(Collection $questions) {
-        $this->questions = $questions;
+    
+    public function __toString()
+    {
+        return $this->getName();
     }
 
 }

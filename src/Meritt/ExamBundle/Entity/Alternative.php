@@ -32,7 +32,7 @@ class Alternative
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isCorrect", type="boolean")
+     * @ORM\Column(name="isCorrect", type="boolean", nullable=true)
      */
     private $isCorrect;
 
@@ -57,101 +57,58 @@ class Alternative
     function __construct() {
         $this->evaluations = new ArrayCollection();
     }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    /**
-     * Set alternativeText
-     *
-     * @param string $alternativeText
-     * @return Alternative
-     */
-    public function setAlternativeText($alternativeText)
-    {
-        $this->alternativeText = $alternativeText;
-
-        return $this;
-    }
-
-    /**
-     * Get alternativeText
-     *
-     * @return string 
-     */
-    public function getAlternativeText()
-    {
+    public function getAlternativeText() {
         return $this->alternativeText;
     }
 
-    /**
-     * Set isCorrect
-     *
-     * @param boolean $isCorrect
-     * @return Alternative
-     */
-    public function setIsCorrect($isCorrect)
-    {
-        $this->isCorrect = $isCorrect;
-
-        return $this;
-    }
-
-    /**
-     * Get isCorrect
-     *
-     * @return boolean 
-     */
-    public function getIsCorrect()
-    {
+    public function getIsCorrect() {
         return $this->isCorrect;
     }
 
-    /**
-     * Set alternativeLabel
-     *
-     * @param string $alternativeLabel
-     * @return Alternative
-     */
-    public function setAlternativeLabel($alternativeLabel)
-    {
-        $this->alternativeLabel = $alternativeLabel;
-
-        return $this;
-    }
-
-    /**
-     * Get alternativeLabel
-     *
-     * @return string 
-     */
-    public function getAlternativeLabel()
-    {
+    public function getAlternativeLabel() {
         return $this->alternativeLabel;
     }
-    
+
     public function getQuestion() {
         return $this->question;
-    }
-
-    public function setQuestion($question) {
-        $this->question = $question;
     }
 
     public function getEvaluations() {
         return $this->evaluations;
     }
 
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function setAlternativeText($alternativeText) {
+        $this->alternativeText = $alternativeText;
+    }
+
+    public function setIsCorrect($isCorrect) {
+        $this->isCorrect = $isCorrect;
+    }
+
+    public function setAlternativeLabel($alternativeLabel) {
+        $this->alternativeLabel = $alternativeLabel;
+    }
+
+    public function setQuestion($question) {
+        $this->question = $question;
+    }
+
     public function setEvaluations($evaluations) {
         $this->evaluations = $evaluations;
     }
+    
+    public function __toString()
+    {
+        return $this->getAlternativeLabel();
+    }
 
-
+ 
 }
