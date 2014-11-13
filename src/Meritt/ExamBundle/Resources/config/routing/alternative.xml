@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="alternative" path="/">
+        <default key="_controller">MerittExamBundle:Alternative:index</default>
+    </route>
+
+    <route id="alternative_show" path="/{id}/show">
+        <default key="_controller">MerittExamBundle:Alternative:show</default>
+    </route>
+
+    <route id="alternative_new" path="/new">
+        <default key="_controller">MerittExamBundle:Alternative:new</default>
+    </route>
+
+    <route id="alternative_create" path="/create">
+        <default key="_controller">MerittExamBundle:Alternative:create</default>
+        <requirement key="_method">post</requirement>
+    </route>
+
+    <route id="alternative_edit" path="/{id}/edit">
+        <default key="_controller">MerittExamBundle:Alternative:edit</default>
+    </route>
+
+    <route id="alternative_update" path="/{id}/update">
+        <default key="_controller">MerittExamBundle:Alternative:update</default>
+        <requirement key="_method">post|put</requirement>
+    </route>
+
+    <route id="alternative_delete" path="/{id}/delete">
+        <default key="_controller">MerittExamBundle:Alternative:delete</default>
+        <requirement key="_method">post|delete</requirement>
+    </route>
+
+</routes>

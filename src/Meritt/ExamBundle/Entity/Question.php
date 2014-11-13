@@ -3,6 +3,7 @@
 namespace Meritt\ExamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Question
@@ -34,9 +35,17 @@ class Question
      * @ORM\Column(name="points", type="integer")
      */
     private $points;
-
-
+    
     /**
+     * @ORM\OneToMany(targetEntity="Alternative", mappedBy="question")
+     */
+    private $alternatives;
+
+    function __construct() {
+        $this->products = new ArrayCollection();
+    }
+
+        /**
      * Get id
      *
      * @return integer 
@@ -91,4 +100,14 @@ class Question
     {
         return $this->points;
     }
+    public function getAlternatives() {
+        return $this->alternatives;
+    }
+
+    public function setAlternatives($alternatives) {
+        $this->alternatives = $alternatives;
+    }
+
+
+    
 }

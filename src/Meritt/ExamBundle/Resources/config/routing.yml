@@ -1,3 +1,7 @@
+meritt_exam_alternative:
+    resource: "@MerittExamBundle/Resources/config/routing/alternative.xml"
+    prefix:   /alternative
+
 meritt_exam_question:
     resource: "@MerittExamBundle/Resources/config/routing/question.xml"
     prefix:   /question
