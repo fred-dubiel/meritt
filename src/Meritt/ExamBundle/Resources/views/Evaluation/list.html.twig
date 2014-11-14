@@ -12,18 +12,26 @@
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Actions</th>
+                <th>Nome</th>
+                <th>Pontos</th>
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
+        {% if entities %}  
+            {% for entity in entities %}
+                <tr>
+                    <td> {{ entity.name}} </td>
+                    <td> {{ entity.points }} </td>
+                </tr>
+            {% endfor %}
+        {% else %}
             <tr>
-                <td>{{ entity.name}}</td>
-                <td> {{ entity.points }}
+                <td>
+                    Sem resultado para a busca
                 </td>
             </tr>
-        {% endfor %}
+            
+        {% endif %}
         </tbody>
     </table>
     {% endblock %}

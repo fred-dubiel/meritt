@@ -1,16 +1,13 @@
 <?php
-
 namespace Meritt\ExamBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Meritt\ExamBundle\Entity\Evaluation;
 use Meritt\ExamBundle\Form\EvaluationType;
 
 /**
- * Evaluation controller.
- *
+ * Class reponsible on Evaluation actions
  */
 class EvaluationController extends Controller
 {
@@ -23,15 +20,22 @@ class EvaluationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('MerittExamBundle:Evaluation')->findAll();
+        $entities = $em->getRepository('MerittExamBundle:Evaluation')
+            ->findAll();
 
-        return $this->render('MerittExamBundle:Evaluation:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        return $this->render(
+            'MerittExamBundle:Evaluation:index.html.twig',
+            [
+                'entities' => $entities,
+            ]
+        );
     }
     /**
-     * Creates a new Evaluation entity.
-     *
+     * Create
+     * 
+     * @param \Symfony\Component\HttpFoundation\Request $request Request
+     * @return type
+     * 
      */
     public function createAction(Request $request)
     {
@@ -44,13 +48,18 @@ class EvaluationController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('evaluation_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('evaluation_show',
+                ['id' => $entity->getId()]
+                )
+            );
         }
 
-        return $this->render('MerittExamBundle:Evaluation:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return $this->render('MerittExamBundle:Evaluation:new.html.twig',
+            [
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            ]
+        );
     }
 
     /**
@@ -73,8 +82,8 @@ class EvaluationController extends Controller
     }
 
     /**
-     * Displays a form to create a new Evaluation entity.
-     *
+     * 
+     * @return type
      */
     public function newAction()
     {
@@ -88,8 +97,10 @@ class EvaluationController extends Controller
     }
 
     /**
-     * Finds and displays a Evaluation entity.
-     *
+     * 
+     * @param type $id
+     * @return type
+     * @throws type
      */
     public function showAction($id)
     {
@@ -101,7 +112,7 @@ class EvaluationController extends Controller
             throw $this->createNotFoundException('Unable to find Evaluation entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->_createDeleteForm($id);
 
         return $this->render('MerittExamBundle:Evaluation:show.html.twig', array(
             'entity'      => $entity,
@@ -110,8 +121,10 @@ class EvaluationController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Evaluation entity.
-     *
+     * 
+     * @param type $id
+     * @return type
+     * @throws type
      */
     public function editAction($id)
     {
@@ -151,10 +164,14 @@ class EvaluationController extends Controller
 
         return $form;
     }
-    /**
-     * Edits an existing Evaluation entity.
-     *
-     */
+    
+   /**
+    * 
+    * @param  Request $request resquest 
+    * @param  int    $id      evaluation to be updated 
+    * @return type 
+    * @throws type 
+    */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -175,15 +192,23 @@ class EvaluationController extends Controller
             return $this->redirect($this->generateUrl('evaluation_edit', array('id' => $id)));
         }
 
-        return $this->render('MerittExamBundle:Evaluation:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'MerittExamBundle:Evaluation:edit.html.twig',
+            [
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            ]
+        );
     }
     /**
-     * Deletes a Evaluation entity.
-     *
+     * Delete
+     * 
+     * @param Request $request Request 
+     * @param int     $id      evaluation to be deleted 
+     * 
+     * @return redirect
+     * @throws CreateNotFoundExpection
      */
     public function deleteAction(Request $request, $id)
     {
@@ -195,7 +220,10 @@ class EvaluationController extends Controller
             $entity = $em->getRepository('MerittExamBundle:Evaluation')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Evaluation entity.');
+                throw $this
+                    ->createNotFoundException(
+                        'Unable to find Evaluation entity.'
+                    );
             }
 
             $em->remove($entity);
@@ -209,32 +237,37 @@ class EvaluationController extends Controller
      * Creates a form to delete a Evaluation entity by id.
      *
      * @param mixed $id The entity id
-     *
+     * 
      * @return \Symfony\Component\Form\Form The form
+     * 
      */
-    private function createDeleteForm($id)
+    private function _createDeleteForm($id)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('evaluation_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
     
     /**
-     * Finds and displays a Evaluation entity.
-     *
+     * Filtering Students and theirs points
+     * 
+     * @param Request $filter filter request
+     * 
+     * @return type
+     * 
      */
     public function listAction(Request $filter)
     {
         
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('MerittExamBundle:Evaluation')->findSorted($filter);
-        
-       
-              return $this->render('MerittExamBundle:Evaluation:list.html.twig', array(
-           'entities' => $entities 
-        ));
+        $entities = $em->getRepository('MerittExamBundle:Evaluation')
+            ->findSorted($filter);
+
+        return $this->render(
+            'MerittExamBundle:Evaluation:list.html.twig', 
+            ['entities' => $entities ]            
+        );
     }
 }
