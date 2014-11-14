@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Lista</h1>
+
+    <form action="{{ path('evaluation_list')}}">
+        email: <input type="text" name="emailSearch">
+        nome: <input type="text" name="nameSearch">
+        estado: <input type="text" name="stateSearch">
+        <button type="submit"> pesquisar </button>
+    </form>
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.name}}</td>
+                <td> {{ entity.points }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}

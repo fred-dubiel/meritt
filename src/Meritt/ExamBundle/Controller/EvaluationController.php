@@ -221,4 +221,20 @@ class EvaluationController extends Controller
             ->getForm()
         ;
     }
+    
+    /**
+     * Finds and displays a Evaluation entity.
+     *
+     */
+    public function listAction(Request $filter)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('MerittExamBundle:Evaluation')->findSorted($filter);
+        
+       
+              return $this->render('MerittExamBundle:Evaluation:list.html.twig', array(
+           'entities' => $entities 
+        ));
+    }
 }
