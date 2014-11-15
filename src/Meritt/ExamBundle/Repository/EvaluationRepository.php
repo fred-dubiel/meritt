@@ -15,37 +15,35 @@ class EvaluationRepository extends EntityRepository
 {
     public function findSorted($filter)
     {
-      
-    $rsm = new ResultSetMapping();
-    $where = "1 = 1";
-    if ($filter->get('nameSearch') ) {
-        $where .= ' AND Student.name like "%'.$filter->get('nameSearch').'%"';
-                 
-    }
-      
-      if ($filter->get('emailSearch') ) {
-          $where .= ' AND Student.name like "%'.$filter->get('emailSearch').'%"';
-      }
-      
-      if ($filter->get('stateSearch')) {
-          $where .= ' AND Student.state = "'.$filter->get('stateSearch').'"';
-          
-      }
-      $sql = 'Select Student.id, Student.name, '
-                    . 'Sum(if(isCorrect=1,Question.points,0)) as points '
-                    . 'from Student Left Join Evaluation on '
-                    . 'Evaluation.student_id = Student.id '
-                    . 'Inner Join Question on Question.id = '
-                    . 'Evaluation.question_id  inner join Alternative on '
-                    . 'Alternative.id = Evaluation.alternative_id '
-                    . 'where '. $where
-                    . ' group '
-                    . 'by Student.id  '
-                    . 'order by points desc;';
-    
-    $conn = $this->_em->getConnection();
-    $statement = $conn->prepare($sql);
-    $statement->execute();
-    return $statement->fetchAll();
+        $where = "1 = 1";
+        if ($filter->get('nameSearch')) {
+            $where .= ' AND Student.name like "%'.$filter->get('nameSearch').'%"';
+
+        }
+
+        if ($filter->get('emailSearch')) {
+              $where .= ' AND Student.name like "%'.$filter->get('emailSearch').'%"';
+        }
+
+        if ($filter->get('stateSearch')) {
+              $where .= ' AND Student.state = "'.$filter->get('stateSearch').'"';
+
+        }
+          $sql = 'Select Student.id, Student.name, '
+                        . 'Sum(if(isCorrect=1,Question.points,0)) as points '
+                        . 'from Student Left Join Evaluation on '
+                        . 'Evaluation.student_id = Student.id '
+                        . 'Inner Join Question on Question.id = '
+                        . 'Evaluation.question_id  inner join Alternative on '
+                        . 'Alternative.id = Evaluation.alternative_id '
+                        . 'where '. $where
+                        . ' group '
+                        . 'by Student.id  '
+                        . 'order by points desc;';
+
+        $conn = $this->_em->getConnection();
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll();
     }
 }

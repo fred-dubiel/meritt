@@ -48,13 +48,16 @@ class EvaluationController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('evaluation_show',
-                ['id' => $entity->getId()]
+            return $this->redirect(
+                $this->generateUrl(
+                    'evaluation_show',
+                    ['id' => $entity->getId()]
                 )
             );
         }
 
-        return $this->render('MerittExamBundle:Evaluation:new.html.twig',
+        return $this->render(
+            'MerittExamBundle:Evaluation:new.html.twig',
             [
                 'entity' => $entity,
                 'form'   => $form->createView(),
@@ -266,8 +269,8 @@ class EvaluationController extends Controller
             ->findSorted($filter);
 
         return $this->render(
-            'MerittExamBundle:Evaluation:list.html.twig', 
-            ['entities' => $entities ]            
+            'MerittExamBundle:Evaluation:list.html.twig',
+            ['entities' => $entities ]
         );
     }
 }
